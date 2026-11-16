@@ -13,12 +13,12 @@ def lambda_handler(event, context):
             bucket_name = record['s3']['bucket']['name']
             file_key = record['s3']['object']['key']
             
-            # Generate a unique transaction/invoice ID
+            # Generate a unique transaction/invoice ID matching DynamoDB's InvoiceID key
             invoice_id = str(uuid.uuid4())
             
             # Structure the extracted metadata item
             item_data = {
-                'InvoiceId': invoice_id,
+                'InvoiceID': invoice_id,
                 'Bucket': bucket_name,
                 'FileKey': file_key,
                 'Status': 'PROCESSED',
